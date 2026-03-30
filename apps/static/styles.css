@@ -1,19 +1,28 @@
-/* Add a black background color to the top navigation */
-.topnav {
-  background-color: #eeeeee;
-  width: 100%;
-}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HTML5 Links</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
 
-/* Style the links inside the navigation bar */
-.topnav a {
-  color: #000000;
-  text-align: center;
-  margin-right: 25px;
-  text-decoration: none;
-  font-size: 17px;
-}
+<body>
 
-/* Add a color to the active/current link */
-.topnav a.active {
-  color: #008CBA;
-}
+<a id="link1" class="link-block" href="https://www.qu.edu.sa" target="_blank">
+    Go to QU website (open a new tab)
+</a>
+
+<br><br>
+
+<a id="link2" class="link-block" href="https://www.qu.edu.sa">
+    Go to QU website (open in the same page/tab)
+</a>
+
+<br><br>
+
+<a id="link3" class="link-block" href="https://www.qu.edu.sa">
+    Go to QU website (open in the same page/tab)
+</a>
+
+</body>
+</html>

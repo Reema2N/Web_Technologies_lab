@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-
 def index(request):
     name = request.GET.get("name") or "world!"
     return render(request, "bookmodule/index.html" , {"name": name})  #your render line
@@ -33,3 +32,16 @@ def viewbook(request, bookId):
 
 def aboutus(request):
     return render(request, "bookmodule/aboutus.html")
+
+def html5_links(request):
+    return render(request, 'bookmodule/html5/links.html')
+
+def html5_text_formatting(request):
+    return render(request, 'bookmodule/html5/text_formatting.html')
+
+def html5_listing(request):
+    return render(request, 'bookmodule/html5/listing.html')
+
+def html5_tables(request):
+    return render(request, 'bookmodule/html5/tables.html')
+
