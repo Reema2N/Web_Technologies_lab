@@ -1,0 +1,31 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %} Searching Page {% endblock %}
+
+{% block content %}
+
+<form method="post">
+
+    {% csrf_token %}
+
+    <label>Keywords:</label>
+    <input type="text" name="keyword" placeholder="enter a keyword"/>
+
+    <br><br>
+
+    <label>Search in:</label>
+
+    <input type="checkbox" name="option1"/>
+    <label>Title</label>
+
+    <input type="checkbox" name="option2"/>
+    <label>Author</label>
+
+    <br><br>
+
+    <button type="submit">Search</button>
+
+</form>
+
+{% endblock %}
