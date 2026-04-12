@@ -1,13 +1,14 @@
 {% extends "layouts/base.html" %}
-
 {% block title %} Books List {% endblock %}
-
 {% block content %}
 
+{% for obj in books %}
+ID: {{obj.id}}, Title: {{obj.title}}
+<hr>
+{% endfor %}
+
 <h2>Books Result</h2>
-
-<ul>
-
+<ul
 {% for book in books %}
 
 <li>

@@ -1,5 +1,15 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from .models import Book
+
+def insert_book(request):
+    Book.objects.create(
+        title='Continuous Delivery',
+        author='J.Humble and D. Farley',
+        edition=1
+    )
+
+    return render(request, 'bookmodule/index.html')
 
 
 def index(request):
@@ -47,6 +57,20 @@ def html5_listing(request):
 def html5_tables(request):
     return render(request, 'bookmodule/html5/tables.html')
 
+def simple_query(request):
+    mybooks = Book.objects.filter(title__icontains='and')
+    return render(request, 'bookmodule/bookList.html', {'books': mybooks})
+
+def complex_query(request):
+    mybooks = Book.objects.filter(author__isnull=False)\
+                          .filter(title__icontains='and')\
+                          .filter(edition__gte=2)\
+                          .exclude(price__lte=100)[:10]
+
+    if len(mybooks) >= 1:
+        return render(request, 'bookmodule/bookList.html', {'books': mybooks})
+    else:
+        return render(request, 'bookmodule/index.html')
 
 def __getBooksList():
    book1 = {'id': 12344321, 'title': 'Continuous Delivery', 'author': 'J.Humble and D. Farley'}
