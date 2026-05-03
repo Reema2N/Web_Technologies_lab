@@ -1,8 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.db.models import Q, Count, Sum, Avg, Max, Min
-from .models import Book,Address, Student
-
+from .models import Book, Address, Student, Publisher, Author
 def insert_book(request):
     Book.objects.create(
         title='Continuous Delivery',
@@ -150,3 +149,56 @@ def lab8_task5(request):
 def lab8_task7(request):
     cities = Address.objects.annotate(student_count=Count('student'))
     return render(request, 'bookmodule/lab8/task7.html', {'cities': cities})
+
+def lab9_task1(request):
+    books = Book.objects.all()
+
+    total_quantity = 0
+    for b in books:
+        total_quantity += b.quantity
+
+    for book in books:
+        if total_quantity > 0:
+            book.availability_percentage = (book.quantity / total_quantity) * 100
+        else:
+            book.availability_percentage = 0
+
+    return render(request, 'bookmodule/lab9/task1.html', {'books': books})
+
+def lab9_task2(request):
+    publishers = Publisher.objects.annotate(total_books=Count('book'))
+
+    return render(request, 'bookmodule/lab9/task2.html', {'publishers': publishers})
+
+def lab9_task3(request):
+    publishers = Publisher.objects.annotate(oldest_pubdate=Min('book__pubdate'))
+    return render(request, 'bookmodule/lab9/task3.html', {'publishers': publishers})
+
+
+def lab9_task4(request):
+    publishers = Publisher.objects.annotate(
+        avg_price=Avg('book__price'),
+        min_price=Min('book__price'),
+        max_price=Max('book__price')
+    )
+
+    return render(request, 'bookmodule/lab9/task4.html', {'publishers': publishers})
+
+def lab9_task5(request):
+    highly_rated = Count('book', filter=Q(book__rating__gte=7))
+
+    publishers = Publisher.objects.annotate(
+        highly_rated_books=highly_rated
+    )
+
+    return render(request, 'bookmodule/lab9/task5.html', {'publishers': publishers})
+
+def lab9_task6(request):
+    publishers = Publisher.objects.annotate(
+        book_count=Count(
+            'book',
+            filter=Q(book__price__gt=50) & Q(book__quantity__lt=5) & Q(book__quantity__gte=1)
+        )
+    )
+
+    return render(request, 'bookmodule/lab9/task6.html', {'publishers': publishers})

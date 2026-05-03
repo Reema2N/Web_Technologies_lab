@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+<h1>Task 4 - Books Price Statistics</h1>
+
+<table border="1">
+    <tr>
+        <th>Publisher</th>
+        <th>Average Price</th>
+        <th>Minimum Price</th>
+        <th>Maximum Price</th>
+    </tr>
+
+    {% for pub in publishers %}
+    <tr>
+        <td>{{ pub.name }}</td>
+        <td>{{ pub.avg_price|floatformat:2 }}</td>
+        <td>{{ pub.min_price|floatformat:2 }}</td>
+        <td>{{ pub.max_price|floatformat:2 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
