@@ -1,0 +1,25 @@
+<h1>Books List (Django Forms)</h1>
+
+<a href="{% url 'add_book2' %}">
+    Add New Book
+</a>
+
+<hr>
+
+{% for book in books %}
+
+<p>
+
+    {{ book.title }}
+
+    <a href="{% url 'edit_book2' book.id %}">
+        Edit
+    </a>
+
+    <a href="{% url 'delete_book2' book.id %}">
+        Delete
+    </a>
+
+</p>
+
+{% endfor %}

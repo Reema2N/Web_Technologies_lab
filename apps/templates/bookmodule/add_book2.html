@@ -1,0 +1,13 @@
+<h1>Add Book Using Django Form</h1>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form }}
+
+    <br><br>
+
+    <button type="submit">Add Book</button>
+
+</form>
