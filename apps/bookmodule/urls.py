@@ -49,5 +49,6 @@ urlpatterns = [
 
     path('clubs/', views.list_clubs, name='list_clubs'),
     path('clubs/add/', views.add_club, name='add_club'),
+
     ]
 

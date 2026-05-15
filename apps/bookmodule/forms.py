@@ -2,6 +2,11 @@ from django import forms
 from .models import Student,Student2,Address2
 from .models import Club
 
+from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+
+
 class StudentForm(forms.ModelForm):
     class Meta:
         model = Student
@@ -30,3 +35,4 @@ class ClubForm(forms.ModelForm):
     class Meta:
         model = Club
         fields = ['name', 'description', 'image']
+

@@ -8,6 +8,8 @@ from .models import Student2
 from .forms import Student2Form
 from .models import Club
 from .forms import ClubForm
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 def insert_book(request):
@@ -212,7 +214,7 @@ def lab9_task6(request):
     return render(request, 'bookmodule/lab9/task6.html', {'publishers': publishers})
 
 #lab 11
-
+@login_required(login_url='login')
 def list_students(request):
     students = Student.objects.all()
 
@@ -337,3 +339,5 @@ def add_club(request):
         form = ClubForm()
 
     return render(request, 'bookmodule/lab11/add_club.html', {'form': form})
+
+#lab12
