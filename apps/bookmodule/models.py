@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
 
-
 class Publisher(models.Model):
     name = models.CharField(max_length=200)
     location = models.CharField(max_length=300)
@@ -9,14 +8,12 @@ class Publisher(models.Model):
     def __str__(self):
         return self.name
 
-
 class Author(models.Model):
     name = models.CharField(max_length=200)
     DOB = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.name
-
 
 class Book(models.Model):
     title = models.CharField(max_length=100)
@@ -40,7 +37,6 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
-
 class Address(models.Model):
     city = models.CharField(max_length=100)
 
@@ -52,6 +48,33 @@ class Student(models.Model):
     name = models.CharField(max_length=100)
     age = models.IntegerField()
     address = models.ForeignKey(Address, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+    
+    
+
+class Address2(models.Model):
+    city = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.city
+
+
+class Student2(models.Model):
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+
+    addresses = models.ManyToManyField(Address2)
+
+    def __str__(self):
+        return self.name
+    
+
+class Club(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    image = models.ImageField(upload_to='clubs/')
 
     def __str__(self):
         return self.name
